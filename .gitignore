@@ -1,0 +1,9 @@
+project/target
+project/build.properties
+project/project
+
+# sbt specific
+target/
+
+# Scala-IDE specific
+.idea
