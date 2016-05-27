@@ -1,6 +1,7 @@
 ## ETL/copy of data from S3 to Cassandra
 
 ### System info
+| Category         | Value                                   |
 |:----------------:|:----------------------------------------|
 | Operating system |  Linux Mint 17.2 Cinnamon 64-bit        |
 | Cinnamon Version |                          2.6.13         |
