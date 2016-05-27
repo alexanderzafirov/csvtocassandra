@@ -37,7 +37,7 @@ object MainApp extends App with Logging {
     val sparkConf = new SparkConf(true)
       .setMaster(s"local[${args.maxCores}]")
       .setAppName(getClass.getSimpleName)
-      .set("spark.cassandra.connection.host", typeSafeConf.getString("cassandra.server-address"))
+      .set("spark.cassandra.connection.host", typeSafeConf.getString("cassandra.host"))
       .set("spark.cassandra.output.batch.size.rows", args.batchSize)
       .set("spark.cassandra.output.concurrent.writes", args.maxCores)
       .set("spark.cassandra.output.batch.size.bytes", typeSafeConf.getString("cassandra.batch-size-bytes"))
