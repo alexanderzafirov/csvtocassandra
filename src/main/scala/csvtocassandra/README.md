@@ -2,7 +2,7 @@
 
 ### How to use
 1. In the root of the dir run `sbt`
-2. Inside sbt execute e.g. `runMain CsvToCassandraApp /home/zbz/data/part-00000 10 4`,
+2. Inside sbt execute e.g. `runMain csvtocassandra.CsvToCassandraApp /home/zbz/data/part-00000 10 4`,
    where the last three parameters are
 ```
   filename

@@ -2,7 +2,7 @@
 
 ### How to use
 1. In the root of the dir run `sbt`
-2. Inside sbt execute `runMain RestApp`
+2. Inside sbt execute `runMain rest.RestApp`
 
 REST interface
 ---
@@ -11,7 +11,7 @@ REST interface
 
 * URL
 
-    ### /observations?carrier_id={carrier_id}&observation_week={observation_week}
+    ### /observations?carrier_id=observation_week={observation_week}&{carrier_id}
 
 * Method
 
@@ -24,6 +24,10 @@ REST interface
     - оbservation_week - number of weeks since 01.01.2000
 
 * Success Response - Json array containing the observations:
+    - Code - 200
+    The query parameter 'observation_week' was malformed:
+    'asd' is not a valid 32-bit signed integer value
+    - Payload:
  ```json
     [
     	{
@@ -60,3 +64,11 @@ REST interface
         ...
     ]
  ```
+* Failed Response - Bad request with clarification message:
+    - Code - 400
+
+    - Payload:
+```
+The query parameter 'observation_week' was malformed:
+    'asd' is not a valid 32-bit signed integer value
+```
