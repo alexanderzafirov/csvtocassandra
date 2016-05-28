@@ -1,18 +1,17 @@
 package rest
 
 import akka.actor.ActorSystem
-import akka.event.slf4j.Logger
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.Sink
+import net.liftweb.json.{NoTypeHints, Serialization}
+import net.liftweb.json.Serialization._
 import org.apache.spark.{SparkConf, SparkContext}
 
-object MainApp extends App {
+object RestApp extends App {
   implicit val system = ActorSystem()
   implicit val materializer = ActorMaterializer()
-
-  private val log = Logger(this.getClass.getSimpleName)
 
   private val typeSafeConfig = system.settings.config
   private val maxCores = typeSafeConfig.getString("cassandra.max-cores")
@@ -40,19 +39,20 @@ object MainApp extends App {
     import com.datastax.spark.connector._
 
     import scala.concurrent.ExecutionContext.Implicits.global
+    implicit val formats = Serialization.formats(NoTypeHints)
 
     val server = Http().bind(host, port)
 
     val route =
-      path("data") {
+      path("observations") {
         get {
-          parameters("carrier_id") { carrierId =>
+          parameters("observation_week", "carrier_id") { (observationWeek, carrierId) =>
             complete {
-              sc.cassandraTable[Int](keyspaceName, table)
+              sc.cassandraTable[CsvModel](keyspaceName, table)
                 .select("carrier_id")
-                .where("carrier_id = ? AND observation_week = ?", carrierId, 749)
+                .where("observation_week = ? AND carrier_id = ?", observationWeek, carrierId)
                 .collectAsync()
-                .map(_.mkString)
+                .map(write(_))
             }
           }
         }

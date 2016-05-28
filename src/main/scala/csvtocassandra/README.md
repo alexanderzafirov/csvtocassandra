@@ -1,22 +1,8 @@
 ## ETL/copy of data from S3 to Cassandra
 
-### System info
-| Category         | Value                                   |
-|:----------------:|:----------------------------------------|
-| Operating system |  Linux Mint 17.2 Cinnamon 64-bit        |
-| Cinnamon Version |                          2.6.13         |
-| Linux Kernel     |  3.16.0-38-generic                      |
-| Processor        |  Inter Core i7-4710HQ CPU @ 2.50 GHz x 4|
-| Memory           |  15.6 GB                                |
-
-
-### Setup
- - Install [Cassandra3.5](http://mirrors.rackhosting.com/apache/cassandra/3.5/apache-cassandra-3.5-bin.tar.gz) locally
- - Follow [quick start guide](https://wiki.apache.org/cassandra/GettingStarted)
-
 ### How to use
 1. In the root of the dir run `sbt`
-2. Inside sbt execute e.g. `runMain MainApp /home/zbz/data/part-00000 10 4`,
+2. Inside sbt execute e.g. `runMain CsvToCassandraApp /home/zbz/data/part-00000 10 4`,
    where the last three parameters are
 ```
   filename
@@ -26,12 +12,6 @@
   maxcores
         Number of cores to use by this application
 ```
-
-### Frameworks/libraries used
- - scopt to provide command line arguments
- - spark-cassandra-connector, spark-core and spark-sql for programmatic schema generation
-   and parallel batch insert into cassandra
- - typesafe config for standardized Scala configuration
 
 ### Processing duration
 

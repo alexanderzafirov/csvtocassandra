@@ -12,5 +12,6 @@ libraryDependencies ++= Seq(
   "com.github.scopt" %% "scopt" % "3.4.0",
   "com.typesafe" % "config" % "1.3.0",
   "com.typesafe.akka" % "akka-http-core_2.11" % "2.4.4",
-  "com.typesafe.akka" % "akka-http-experimental_2.11" % "2.4.4"
+  "com.typesafe.akka" % "akka-http-experimental_2.11" % "2.4.4",
+  "net.liftweb" %% "lift-webkit" % "3.0-M5-1"
 )

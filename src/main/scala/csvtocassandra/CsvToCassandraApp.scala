@@ -5,7 +5,7 @@ import org.apache.spark.{Logging, SparkConf, SparkContext}
 
 case class CmdLineArgs(filename: String = "exampleCsv", batchSize: String = "10", maxCores: String = "4")
 
-object MainApp extends App with Logging {
+object CsvToCassandraApp extends App with Logging {
 
   override def main(args: Array[String]): Unit = {
 
@@ -37,15 +37,15 @@ object MainApp extends App with Logging {
     val typeSafeConf = ConfigFactory.load()
 
     val sparkConf = new SparkConf(true)
-      .setMaster(s"local[${args.maxCores}]")
+      .setMaster(typeSafeConf.getString("spark.master"))
       .setAppName(getClass.getSimpleName)
-      .set("spark.cassandra.connection.host", typeSafeConf.getString("cassandra.host"))
+      .set("spark.cores.max", args.maxCores)
+      .set("spark.cassandra.connection.host", typeSafeConf.getString("spark.cassandra.connection.host"))
       .set("spark.cassandra.output.batch.size.rows", args.batchSize)
-      .set("spark.cassandra.output.concurrent.writes", args.maxCores)
-      .set("spark.cassandra.output.batch.size.bytes", typeSafeConf.getString("cassandra.batch-size-bytes"))
+      .set("spark.cassandra.output.concurrent.writes", typeSafeConf.getInt("spark.cassandra.concurrent.writes").toString)
 
-    val keyspaceName = typeSafeConf.getString("cassandra.keyspace-name")
-    val table = typeSafeConf.getString("cassandra.table")
+    val keyspaceName = typeSafeConf.getString("spark.cassandra.keyspace")
+    val table = typeSafeConf.getString("spark.cassandra.table")
 
     insertDbTable(sparkConf, keyspaceName, table)
 
