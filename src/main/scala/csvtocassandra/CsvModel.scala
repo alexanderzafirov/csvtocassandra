@@ -1,3 +1,5 @@
+package csvtocassandra
+
 import java.util.UUID
 
 @SerialVersionUID(100L)

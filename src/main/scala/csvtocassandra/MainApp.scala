@@ -1,5 +1,7 @@
-import org.apache.spark.{Logging, SparkConf, SparkContext}
+package csvtocassandra
+
 import com.typesafe.config._
+import org.apache.spark.{Logging, SparkConf, SparkContext}
 
 case class CmdLineArgs(filename: String = "exampleCsv", batchSize: String = "10", maxCores: String = "4")
 
