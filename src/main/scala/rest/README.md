@@ -11,7 +11,7 @@ REST interface
 
 * URL
 
-    ### /observations?carrier_id=observation_week={observation_week}&{carrier_id}
+    ### /observations?observation_week={observation_week}&carrier_id={carrier_id}
 
 * Method
 
