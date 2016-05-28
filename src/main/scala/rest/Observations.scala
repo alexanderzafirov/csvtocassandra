@@ -1,8 +1,6 @@
 package rest
 
-import java.util.UUID
-
-case class CsvModel(
+case class Observations(
                      observed_date_min_as_infaredate: Int,
                      observed_date_max_as_infaredate: Int,
                      full_weeks_before_departure: Int,
@@ -33,5 +31,5 @@ case class CsvModel(
                      home_flight_sector_2_flight_code_id: Option[Int],
                      home_flight_sector_3_flight_code_id: Option[Int],
                      observation_week: Int,
-                     uuid: UUID
-                   )
+                     uuid: String
+                   ) extends Serializable

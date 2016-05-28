@@ -34,18 +34,18 @@ object CsvToCassandraApp extends App with Logging {
   }
 
   private def init(args: CmdLineArgs): Unit = {
-    val typeSafeConf = ConfigFactory.load()
+    val typeSafeConfig = ConfigFactory.load()
 
     val sparkConf = new SparkConf(true)
-      .setMaster(typeSafeConf.getString("spark.master"))
+      .setMaster(typeSafeConfig.getString("spark.master"))
       .setAppName(getClass.getSimpleName)
       .set("spark.cores.max", args.maxCores)
-      .set("spark.cassandra.connection.host", typeSafeConf.getString("spark.cassandra.connection.host"))
+      .set("spark.cassandra.connection.host", typeSafeConfig.getString("spark.cassandra.connection.host"))
       .set("spark.cassandra.output.batch.size.rows", args.batchSize)
-      .set("spark.cassandra.output.concurrent.writes", typeSafeConf.getInt("spark.cassandra.concurrent.writes").toString)
+      .set("spark.cassandra.output.concurrent.writes", typeSafeConfig.getInt("spark.cassandra.concurrent.writes").toString)
 
-    val keyspaceName = typeSafeConf.getString("spark.cassandra.keyspace")
-    val table = typeSafeConf.getString("spark.cassandra.table")
+    val keyspaceName = typeSafeConfig.getString("spark.cassandra.keyspace")
+    val table = typeSafeConfig.getString("spark.cassandra.table")
 
     insertDbTable(sparkConf, keyspaceName, table)
 

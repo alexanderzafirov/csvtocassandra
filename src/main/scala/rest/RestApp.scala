@@ -14,18 +14,17 @@ object RestApp extends App {
   implicit val materializer = ActorMaterializer()
 
   private val typeSafeConfig = system.settings.config
-  private val maxCores = typeSafeConfig.getString("cassandra.max-cores")
 
   val sparkConf = new SparkConf(true)
-    .setMaster(s"local[$maxCores]")
+    .setMaster(typeSafeConfig.getString("spark.master"))
     .setAppName(getClass.getSimpleName)
-    .set("spark.cassandra.connection.host", typeSafeConfig.getString("cassandra.host"))
-    .set("spark.cassandra.output.concurrent.writes", maxCores)
+    .set("spark.cassandra.connection.host", typeSafeConfig.getString("spark.cassandra.connection.host"))
+    .set("spark.cassandra.output.concurrent.writes", typeSafeConfig.getString("spark.cassandra.cores.max"))
 
   val sc = new SparkContext(sparkConf)
 
-  val keyspaceName = typeSafeConfig.getString("cassandra.keyspace-name")
-  val table = typeSafeConfig.getString("cassandra.table")
+  val keyspaceName = typeSafeConfig.getString("spark.cassandra.keyspace")
+  val table = typeSafeConfig.getString("spark.cassandra.table")
 
   setupServer(
     typeSafeConfig.getString("akka.http.server.interface"),
@@ -46,10 +45,9 @@ object RestApp extends App {
     val route =
       path("observations") {
         get {
-          parameters("observation_week", "carrier_id") { (observationWeek, carrierId) =>
+          parameters('observation_week.as[Int], 'carrier_id.as[Int]) { (observationWeek, carrierId) =>
             complete {
-              sc.cassandraTable[CsvModel](keyspaceName, table)
-                .select("carrier_id")
+              sc.cassandraTable[Observations](keyspaceName, table)
                 .where("observation_week = ? AND carrier_id = ?", observationWeek, carrierId)
                 .collectAsync()
                 .map(write(_))
