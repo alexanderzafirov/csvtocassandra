@@ -27,5 +27,5 @@
  - fine tune spark and cassandra for optimal performance
  - separate concerns within the app e.g. dedicated classes for settings parameters, json serialization
  - build for scale
- - any/more error handling
+ - add some/more error handling
  - add tests e.g. to verify csv parsing, rest api success and failure scenarios
