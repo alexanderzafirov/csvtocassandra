@@ -25,8 +25,7 @@ REST interface
 
 * Success Response - Json array containing the observations:
     - Code - 200
-    The query parameter 'observation_week' was malformed:
-    'asd' is not a valid 32-bit signed integer value
+
     - Payload:
  ```json
     [
