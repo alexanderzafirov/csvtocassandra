@@ -48,9 +48,3 @@
 | part-00029    |  325       |
 
 Total:  8714s ~ 2.45h
-
-### What could be done better:
- - assemble a fat jar with spark dependencies and use that instead of running code on server
- - fine tune spark and cassandra for optimal performance
- - separation of concerns within the app
- - add tests to verify csv parsing

@@ -9,15 +9,23 @@
 | Memory           |  15.6 GB                                |
 
 ### Prerequisites
- - Install [Cassandra3.5](http://mirrors.rackhosting.com/apache/cassandra/3.5/apache-cassandra-3.5-bin.tar.gz) locally
- - Follow [quick start guide](https://wiki.apache.org/cassandra/GettingStarted)
+ - install [Cassandra3.5](http://mirrors.rackhosting.com/apache/cassandra/3.5/apache-cassandra-3.5-bin.tar.gz) locally
+ - follow [quick start guide](https://wiki.apache.org/cassandra/GettingStarted)
 
 ### Frameworks/libraries used
  - `scopt` to provide command line arguments
  - `spark-cassandra-connector`, `spark-core` and `spark-sql` for interaction between Apache Spark and Apache Cassandra
  - `typesafe config` for standardized Scala configuration
- - `akka-http and akka-core` for REST Api generation
+ - `akka-http and akka-core` for REST api generation
 
 ### Solutions
 - [ETL/copy of data from S3 to Cassandra](src/main/scala/csvtocassandra/README.md)
 - [Rest service exercise](src/main/scala/rest/README.md)
+
+### What could be done better:
+ - assemble a fat jar with spark dependencies
+ - fine tune spark and cassandra for optimal performance
+ - separate concerns within the app e.g. dedicated classes for settings parameters, json serialization
+ - build for scale
+ - any/more error handling
+ - add tests e.g. to verify csv parsing, rest api success and failure scenarios
