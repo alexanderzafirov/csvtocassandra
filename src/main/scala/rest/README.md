@@ -7,7 +7,7 @@
 REST interface
 ---
 
-**Retrieve a list of observations for a given carrier id**
+**Retrieve a list of observations for a given observation week and carrier id**
 
 * URL
 

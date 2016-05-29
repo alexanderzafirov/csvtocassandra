@@ -21,6 +21,8 @@
 ### Solutions
 - [ETL/copy of data from S3 to Cassandra](src/main/scala/csvtocassandra/README.md)
 - [Rest service exercise](src/main/scala/rest/README.md)
+- [Data mining exercise](src/main/scala/datamining/README.md)
+- [Visualization exercise](src/main/scala/visualization/visualization.ipynb)
 
 ### What could be done better:
  - assemble a fat jar with spark dependencies
