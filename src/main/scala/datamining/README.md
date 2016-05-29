@@ -1,8 +1,5 @@
 ## Data mining exercise
 
-Queries
----
-
 - Count the duplicates and the unique rows - since Cassandra doesn't provide a `group by` function
 we can leverage on user defined aggregations to make ourselves one
 
