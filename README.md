@@ -17,6 +17,7 @@
  - `spark-cassandra-connector`, `spark-core` and `spark-sql` for interaction between Apache Spark and Apache Cassandra
  - `typesafe config` for standardized Scala configuration
  - `akka-http and akka-core` for REST api generation
+ - `matplotlib` and `ploty` for diagram generation
 
 ### Solutions
 - [ETL/copy of data from S3 to Cassandra](src/main/scala/csvtocassandra/README.md)
