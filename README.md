@@ -1,4 +1,4 @@
-## tst
+## Infare exercise
 
 ### System info
 | Category         | Value                                   |
@@ -28,6 +28,6 @@
  - assemble a fat jar with spark dependencies
  - fine tune spark and cassandra for optimal performance
  - separate concerns within the app e.g. dedicated classes for settings parameters, json serialization
- - build for scale
  - add some/more error handling
  - add tests e.g. to verify csv parsing, rest api success and failure scenarios
+ - investigate Cassandra in more detail to provide ranges on queries, create indexes, setup better clustering keys for querying
