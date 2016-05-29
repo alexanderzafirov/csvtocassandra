@@ -33,3 +33,10 @@ This can be used as such:
 select groupByObsrvweekAndCount(observation_week) FROM observations;
 ```
 
+- Count how many rows in the data set are one way flights and how many are return flights
+```cql
+select count(*) from observations where is_trip_one_way = 0 ALLOW FILTERING;
+select count(*) from observations where is_trip_one_way = 1 ALLOW FILTERING;
+```
+
+_Note: This is a very expensive query_
